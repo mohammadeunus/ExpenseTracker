@@ -31,7 +31,7 @@ namespace ExpenseTracker.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "EachCategory",
+                name: "ExpenseRecords",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -42,9 +42,9 @@ namespace ExpenseTracker.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EachCategory", x => x.Id);
+                    table.PrimaryKey("PK_ExpenseRecords", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EachCategory_Categories_CategoryId",
+                        name: "FK_ExpenseRecords_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
@@ -53,8 +53,8 @@ namespace ExpenseTracker.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EachCategory_CategoryId",
-                table: "EachCategory",
+                name: "IX_ExpenseRecords_CategoryId",
+                table: "ExpenseRecords",
                 column: "CategoryId");
         }
 
@@ -62,7 +62,7 @@ namespace ExpenseTracker.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EachCategory");
+                name: "ExpenseRecords");
 
             migrationBuilder.DropTable(
                 name: "Categories");

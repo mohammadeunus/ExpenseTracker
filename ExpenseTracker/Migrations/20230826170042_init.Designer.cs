@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseTracker.Migrations
 {
     [DbContext(typeof(ExpenseTrackerDbContext))]
-    [Migration("20230826093759_init")]
+    [Migration("20230826170042_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -36,7 +36,7 @@ namespace ExpenseTracker.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("ExpenseTracker.Models.EachCategoryModel", b =>
+            modelBuilder.Entity("ExpenseTracker.Models.ExpenseRecordModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,10 +55,10 @@ namespace ExpenseTracker.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("EachCategory");
+                    b.ToTable("ExpenseRecords");
                 });
 
-            modelBuilder.Entity("ExpenseTracker.Models.EachCategoryModel", b =>
+            modelBuilder.Entity("ExpenseTracker.Models.ExpenseRecordModel", b =>
                 {
                     b.HasOne("ExpenseTracker.Models.CategoriesModel", "Category")
                         .WithMany()

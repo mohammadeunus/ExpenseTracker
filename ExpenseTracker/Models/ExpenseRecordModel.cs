@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseTracker.Models
 {
-    public class EachCategoryModel
+    public class ExpenseRecordModel
     {
         [Key]
         public int Id { get; set; }
