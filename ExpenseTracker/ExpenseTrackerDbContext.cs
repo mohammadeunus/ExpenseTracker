@@ -2,14 +2,15 @@
 using ExpenseTracker.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExpenseTracker
+namespace ExpenseTracker;
+
+public class ExpenseTrackerDbContext : DbContext
 {
-    public class ExpenseTrackerDbContext : DbContext
-    {
-        public DbSet<CategoriesModel> Categories { get; set; }
-        public DbSet<EachCategoryModel> EachCategory { get; set; }
+    public ExpenseTrackerDbContext(DbContextOptions<ExpenseTrackerDbContext> options)
+            : base(options)
+    { }
+    public DbSet<CategoriesModel> Categories { get; set; }
+    public DbSet<EachCategoryModel> EachCategory { get; set; }
 
-        // Other configuration and constructor here
-    }
-
+    // Other configuration and constructor here
 }
