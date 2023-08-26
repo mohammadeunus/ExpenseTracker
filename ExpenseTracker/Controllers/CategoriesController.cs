@@ -72,4 +72,27 @@ public class CategoriesController : ControllerBase
             return StatusCode(500, "Internal Server Error: An error occurred while processing the request.");
         }
     }
+
+    [HttpDelete("DeleteCategory")]
+    public async Task<IActionResult> DeleteCategoryById(int id)
+    {
+        // check id available or not.
+        if (!await _categoriesRepository.IsCategoryIdUniqueAsync(id)) return BadRequest("Category not found.");
+        try
+        {
+            var deleted = await _categoriesRepository.IsCategoryIdDeleted(id);
+            if (deleted)
+            {
+                return Ok($"{id} deleted successfully");
+            }
+            else { 
+                return BadRequest("Internal Server Error: trye again"); 
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"CategoriesController > DeleteCategoryById > Error: {ex.Message}");
+            return StatusCode(500, "Internal Server Error: An error occurred while processing the request.");
+        }
+    }
 }

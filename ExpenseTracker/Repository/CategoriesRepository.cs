@@ -105,5 +105,23 @@ public class CategoriesRepository : ICategoriesRepository
         }
     }
 
+    public async Task<bool> IsCategoryIdDeleted(int id)
+    {
+        try
+        {
+            var result = await _context.Categories.FirstOrDefaultAsync(e => e.Id == id);
 
+            //check category duplicate or not.
+            _context.Categories.Remove(result);
+            var confirm = await _context.SaveChangesAsync();
+            return confirm>0;
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"CategoriesRepository > IsCategoryIdDeleted > failed delete id: {id} : {ex.Message}");
+            return false;
+        }
+
+    }
 }
