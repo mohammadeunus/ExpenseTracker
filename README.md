@@ -87,16 +87,16 @@ Follow these steps to set up and run the project on your computer:
 7. **Test the API Endpoints**:
 
    You can use tools like [Postman](https://www.postman.com/downloads/) or [curl](https://curl.se/download.html) to test the API endpoints:
-   CATEGORY CONTROLLER
-   - GET: `https://localhost:7055/Categories/GetCategories)`
-   - POST: `https://localhost:7055/Categories/AddCategory?responseCategoryName=Grocery`
-   - DELETE: `https://localhost:7055/Categories/DeleteCategory?id=5`
-   - PUT: `https://localhost:7055/Categories/UpdateCategory`
-   EXPENSE RECORD CONTROLLER
-   - GET: `https://localhost:7055/ExpenseRecord/GetExpenseBetweenDates`
-   - POST: `https://localhost:7055/ExpenseRecord/AddExpense`
-  
-8. **Cleanup**:
+   - CATEGORY CONTROLLER
+      - GET: `https://localhost:7055/Categories/GetCategories)`
+      - POST: `https://localhost:7055/Categories/AddCategory?responseCategoryName=Grocery`
+      - DELETE: `https://localhost:7055/Categories/DeleteCategory?id=5`
+      - PUT: `https://localhost:7055/Categories/UpdateCategory`
+   - EXPENSE RECORD CONTROLLER
+      - GET: `https://localhost:7055/ExpenseRecord/GetExpenseBetweenDates`
+      - POST: `https://localhost:7055/ExpenseRecord/AddExpense`
+     
+9. **Cleanup**:
 
    Once you're done, you can stop the application by pressing `Ctrl + C` in the terminal.
 
