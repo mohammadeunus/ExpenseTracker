@@ -1,8 +1,7 @@
 ﻿using ExpenseTracker.DTO;
 using ExpenseTracker.Models;
 using ExpenseTracker.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore; 
 using System.Linq;
 
 namespace ExpenseTracker.Repository;
@@ -53,7 +52,7 @@ public class ExpenseRepository  : IExpenseRepository
     {
         try
         {
-            //Fetch all the ExpenseRecords within the date range
+            // Fetch all the ExpenseRecords within the date range
             var expenses = await _context.ExpenseRecords
                 .Where(expense => expense.ExpenseDate >= IstartDate && expense.ExpenseDate <= IendDate)
                 .ToListAsync();
