@@ -1,6 +1,30 @@
-# Expense Tracker ASP.NET Core Web API Project
+# Expense Tracker Web Application
 
-This repository contains an Expense Tracker Web API built using ASP.NET Core. The application allows you to track expenses in different categories.
+This is a web application for tracking expenses in different categories.
+
+## Project Requirements
+
+- ✔ Users should see all expense categories.
+- ❌ Users should be able to edit or delete any specific category.
+- ✔ The expense amount field should only accept integer or decimal numbers.
+- ✔ The system should prevent recording any expenditure at a future date.
+- ✔ The system must prevent users from creating duplicate categories.
+- ❌ Users should be able to see expenses between two dates. (Not Implemented)
+- ❌ Users should be able to edit or delete a particular expense entry. (Not Implemented)
+
+> **Note:** 
+> - ✔ represents that the requirement has been successfully implemented.
+> - ❌ represents that the requirement has not been implemented yet.
+
+## Technological Requirements
+
+- ✔ Asp.net core framework 5 or above version.
+- ✔ Entity Framework Core.
+- ✔ MariaDB.
+- ✔ C# Programming Language.
+- ❌ Bootstrap 4 or 5 CSS Framework.
+- ✔ Code-first approach to system development.
+
 
 ## Prerequisites
 
