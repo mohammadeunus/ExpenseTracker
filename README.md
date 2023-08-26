@@ -12,9 +12,6 @@ This is a web application for tracking expenses in different categories.
 - ✔ Users should be able to see expenses between two dates. 
 - ❌ Users should be able to edit or delete a particular expense entry.
 
-> **Note:** 
-> - ✔ represents that the requirement has been successfully implemented.
-> - ❌ represents that the requirement has not been implemented yet.
 
 ## Technological Requirements
 
@@ -25,6 +22,9 @@ This is a web application for tracking expenses in different categories.
 - ❌ Bootstrap 4 or 5 CSS Framework.
 - ✔ Code-first approach to system development.
 
+> **Note:** 
+> - ✔ represents that the requirement has been successfully implemented.
+> - ❌ represents that the requirement has not been implemented yet.
 
 ## Prerequisites
 
