@@ -9,5 +9,6 @@ public interface ICategoriesRepository
     Task<bool> IsCategoryNameUniqueAsync(string categoryName);
     Task<bool> IsCategoryIdUniqueAsync(int categoryId);
     Task<string> GetCategoryNameByIdAsync(int categoryId);
-
+    Task<bool> IsCategoryIdDeleted(int id);
+    Task<bool> IsCategoryIdUpdated(CategoriesModel response);
 }

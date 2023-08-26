@@ -105,5 +105,48 @@ public class CategoriesRepository : ICategoriesRepository
         }
     }
 
+    public async Task<bool> IsCategoryIdDeleted(int id)
+    {
+        try
+        {
+            var result = await _context.Categories.FirstOrDefaultAsync(e => e.Id == id);
+
+            //check category duplicate or not.
+            _context.Categories.Remove(result);
+            var confirm = await _context.SaveChangesAsync();
+            return confirm>0;
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"CategoriesRepository > IsCategoryIdDeleted > failed delete id: {id} : {ex.Message}");
+            return false;
+        }
+
+    }
+
+    public async Task<bool> IsCategoryIdUpdated(CategoriesModel response)
+    {
+        try
+        {
+            // Retrieve the existing category based on ID from response.
+            var existingCategory = await _context.Categories
+                 .FirstOrDefaultAsync(e => e.Id == response.Id);
+
+            if (existingCategory == null) return false;
+
+            // Update the properties of the existing category with the data from the response.
+            existingCategory.Name = response.Name;   
+            var check = await _context.SaveChangesAsync();
+
+            // Return true if changes were saved successfully, otherwise false. 
+            return check > 0; 
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"CategoriesRepository > IsCategoryIdUpdated > failed update id: {response.Id} : {ex.Message}");
+            return false;
+        }
+    }
 
 }
