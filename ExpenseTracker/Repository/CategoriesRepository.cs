@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using ExpenseTracker.Models;
 using ExpenseTracker.Repository;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Xml.Linq;
 
 namespace ExpenseTracker.Repositories;
 
@@ -68,7 +69,7 @@ public class CategoriesRepository : ICategoriesRepository
         }
         catch (Exception ex)
         {
-            _logger.LogError("CategoriesRepository > IsCategoryNameUnique > Error: {ex.Message}");
+            _logger.LogError($"CategoriesRepository > IsCategoryNameUnique > Error: {ex.Message}");
             return false;
         } 
     }
@@ -83,25 +84,26 @@ public class CategoriesRepository : ICategoriesRepository
         }
         catch (Exception ex)
         {
-            _logger.LogError("CategoriesRepository > IsCategoryIdUnique > Error: {ex.Message}");
+            _logger.LogError($"CategoriesRepository > IsCategoryIdUnique > Error: {ex.Message}");
             return false; 
         }
     }
-
-    public async Task<bool> GetCategoryName2ListAsync(int categoryId)
+    public async Task<string> GetCategoryNameByIdAsync(int categoryId)
     {
         try
         {
             //check category duplicate or not.
-            if (await _context.Categories.AnyAsync(x => x.Id == categoryId))
-                return true;
-            return false;
+            var fetched = await _context.Categories.FirstOrDefaultAsync(x => x.Id == categoryId);
+            var fetchedCategoryName = fetched.Name;   
+            return fetchedCategoryName;
+
         }
         catch (Exception ex)
         {
-            _logger.LogError("CategoriesRepository > IsCategoryIdUnique > Error: {ex.Message}");
-            return false;
+            _logger.LogError($"CategoriesRepository > IsCategoryIdUnique > failed fetching input: {categoryId} : {ex.Message}");
+            return null;
         }
     }
+
 
 }

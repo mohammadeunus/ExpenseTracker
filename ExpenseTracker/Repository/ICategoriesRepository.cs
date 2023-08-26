@@ -8,5 +8,6 @@ public interface ICategoriesRepository
     //for eachCategory
     Task<bool> IsCategoryNameUniqueAsync(string categoryName);
     Task<bool> IsCategoryIdUniqueAsync(int categoryId);
+    Task<string> GetCategoryNameByIdAsync(int categoryId);
 
 }
