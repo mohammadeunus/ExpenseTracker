@@ -9,8 +9,8 @@ This is a web application for tracking expenses in different categories.
 - ✔ The expense amount field should only accept integer or decimal numbers.
 - ✔ The system should prevent recording any expenditure at a future date.
 - ✔ The system must prevent users from creating duplicate categories.
-- ✔ Users should be able to see expenses between two dates. (Not Implemented)
-- ❌ Users should be able to edit or delete a particular expense entry. (Not Implemented)
+- ✔ Users should be able to see expenses between two dates. 
+- ❌ Users should be able to edit or delete a particular expense entry.
 
 > **Note:** 
 > - ✔ represents that the requirement has been successfully implemented.
