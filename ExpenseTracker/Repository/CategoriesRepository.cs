@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ExpenseTracker.Models;
 using ExpenseTracker.Repository;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ExpenseTracker.Repositories;
 
@@ -41,9 +42,9 @@ public class CategoriesRepository : ICategoriesRepository
             if (string.IsNullOrWhiteSpace(categoryName))
                 return false;
 
-            if (await _context.Categories.AnyAsync(x => x.Name == categoryName))
-                return false;
+            
 
+            //save data in database.
             var newCategory = new CategoriesModel { Name = categoryName };
             await _context.Categories.AddAsync(newCategory);
             var isSaved = await _context.SaveChangesAsync();
@@ -56,4 +57,51 @@ public class CategoriesRepository : ICategoriesRepository
             throw; // Rethrow the exception or handle it appropriately
         }
     }
+    public async Task<bool> IsCategoryNameUniqueAsync(string categoryName)
+    {
+        try
+        {
+            //check category duplicate or not.
+            if (await _context.Categories.AnyAsync(x => x.Name == categoryName))
+                return true;
+            return false;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("CategoriesRepository > IsCategoryNameUnique > Error: {ex.Message}");
+            return false;
+        } 
+    }
+    public async Task<bool> IsCategoryIdUniqueAsync(int categoryId)
+    {
+        try
+        {
+            //check category duplicate or not.
+            if (await _context.Categories.AnyAsync(x => x.Id == categoryId))
+                return true;
+            return false;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("CategoriesRepository > IsCategoryIdUnique > Error: {ex.Message}");
+            return false; 
+        }
+    }
+
+    public async Task<bool> GetCategoryName2ListAsync(int categoryId)
+    {
+        try
+        {
+            //check category duplicate or not.
+            if (await _context.Categories.AnyAsync(x => x.Id == categoryId))
+                return true;
+            return false;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("CategoriesRepository > IsCategoryIdUnique > Error: {ex.Message}");
+            return false;
+        }
+    }
+
 }

@@ -39,22 +39,23 @@ public class CategoriesController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"CategoriesController > GetCategories > Error: {ex.Message}");
-            return StatusCode(500, "An error occurred while processing the request.");
+            return StatusCode(500, "Internal Server Error: An error occurred while processing the request.");
         }
     }
 
     [HttpPost("AddCategory")]
     public async Task<IActionResult> AddCategory(string responseCategoryName)
     {
-        if (responseCategoryName == null)
-        {
-            return BadRequest("No data inserted.");
-        }
+        // user inserted data or not.
+        if (responseCategoryName == null) return BadRequest("No data inserted.");
 
         try
         {
-            var isAdded = await _categoriesRepository.AddCategoryAsync(responseCategoryName);
+            // check duplicate or not.
+            if (await _categoriesRepository.IsCategoryNameUniqueAsync(responseCategoryName)) return BadRequest("Duplicate category.");
 
+            //upload data to database.
+            var isAdded = await _categoriesRepository.AddCategoryAsync(responseCategoryName.Trim());
             if (isAdded)
             {
                 _logger.LogInformation($"CategoriesController > AddCategory > Category added successfully.");
@@ -62,13 +63,13 @@ public class CategoriesController : ControllerBase
             }
             else
             {
-                return BadRequest("Category already exists or data could not be saved.");
+                return BadRequest("Data could not be saved, try again.");
             }
         }
         catch (Exception ex)
         {
             _logger.LogError($"CategoriesController > AddCategory > Error: {ex.Message}");
-            return StatusCode(500, "An error occurred while processing the request.");
+            return StatusCode(500, "Internal Server Error: An error occurred while processing the request.");
         }
     }
 }
