@@ -5,8 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
  
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.DependencyInjection; 
-
+using Microsoft.Extensions.DependencyInjection;
+using ExpenseTracker.Repositories;
+using ExpenseTracker.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//IOC
+builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>(); //Creates a new instance for each HTTP request and Shares that instance within the same request's components.
 
 //mysql connection build
 var connString = builder.Configuration.GetConnectionString("GeorgekosmidisConnection");
