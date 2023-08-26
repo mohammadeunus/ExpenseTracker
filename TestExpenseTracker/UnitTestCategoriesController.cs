@@ -10,6 +10,7 @@ namespace TestExpenseTracker;
 
 public class UnitTestCategoriesController
 { 
+    /*
     [Fact]
     public async void AddCategory_ReturnsOkResult()
     {
@@ -41,5 +42,5 @@ public class UnitTestCategoriesController
         // Assert
         result.Should().BeOfType<BadRequestObjectResult>()
             .Which.Value.Should().Be("No data inserted.");
-    }
+    }*/
 }

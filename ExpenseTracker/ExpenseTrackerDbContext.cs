@@ -10,7 +10,7 @@ public class ExpenseTrackerDbContext : DbContext
             : base(options)
     { }
     public DbSet<CategoriesModel> Categories { get; set; }
-    public DbSet<EachCategoryModel> EachCategory { get; set; }
+    public DbSet<ExpenseRecordModel> ExpenseRecords { get; set; }
 
     // Other configuration and constructor here
 }

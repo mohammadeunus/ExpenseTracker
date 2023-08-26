@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
 using ExpenseTracker.Repositories;
 using ExpenseTracker.Repository;
+using ExpenseTracker.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ builder.Services.AddSwaggerGen();
 
 //IOC
 builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>(); //Creates a new instance for each HTTP request and Shares that instance within the same request's components.
+builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>(); //Creates a new instance for each HTTP request and Shares that instance within the same request's components.
+builder.Services.AddScoped<IExpenseServices, ExpenseServices>();  
 
 //mysql connection build
 var connString = builder.Configuration.GetConnectionString("GeorgekosmidisConnection");
