@@ -83,6 +83,64 @@ public class ExpenseRepository  : IExpenseRepository
 
         }
 
-    } 
+    }
 
+    public async Task<bool> HasUpdatedExpenseInCategoryAsync(ExpenseUpdateDTO response)
+    {
+        try
+        {
+            // Retrieve the existing expense based on ID from response.
+            var existingExpense = await _context.ExpenseRecords
+                 .FirstOrDefaultAsync(e => e.Id == response.Id);
+
+            // Update the properties of the existing category with the data from the response.
+            existingExpense.ExpenseDate = response.ExpenseDate;
+            existingExpense.Amount = response.Amount;
+            var IsRecorSavedInDB = await _context.SaveChangesAsync();
+
+            // Returns true if changes were saved successfully, otherwise false. 
+            return IsRecorSavedInDB > 0;
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"ExpenseRepository > HasUpdatedExpenseInCategoryAsync > Error: {ex.Message}");
+            return false;
+        }
+    }
+    public async Task<bool> IsExpenseDeleted(int id)
+    {
+        try
+        {
+            var result = await _context.ExpenseRecords.FirstOrDefaultAsync(e => e.Id == id);
+
+            //check category duplicate or not.
+            _context.ExpenseRecords.Remove(result);
+            var deletedRowInDb = await _context.SaveChangesAsync();
+            return deletedRowInDb > 0;
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"CategoriesRepository > IsExpenseDeleted > failed delete id: {id} : {ex.Message}");
+            return false;
+        }
+
+    }
+
+    public async Task<bool> IsExpenseIdUniqueAsync(int expenseId)
+    {
+        try
+        {
+            //check ExpenseRecords duplicate or not.
+            if (await _context.ExpenseRecords.AnyAsync(x => x.Id == expenseId))
+                return true;
+            return false;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"CategoriesRepository > IsExpenseIdUniqueAsync > Error: {ex.Message}");
+            return false;
+        }
+    }
 }

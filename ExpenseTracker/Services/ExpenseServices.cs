@@ -27,4 +27,10 @@ public class ExpenseServices : IExpenseServices
         }
 
     }
+
+    public bool IsDateInFuture(DateTime expenseDate)
+    {
+        if (expenseDate > DateTime.UtcNow) return true;
+        else return false;
+    }
 }

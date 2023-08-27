@@ -10,7 +10,7 @@ This is a web application for tracking expenses in different categories.
 - ✔ The system should prevent recording any expenditure at a future date.
 - ✔ The system must prevent users from creating duplicate categories.
 - ✔ Users should be able to see expenses between two dates. 
-- ❌ Users should be able to edit or delete a particular expense entry.
+- ✔ Users should be able to edit or delete a particular expense entry.
 
 
 ## Technological Requirements
