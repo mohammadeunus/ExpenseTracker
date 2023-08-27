@@ -32,7 +32,7 @@ public class CategoriesRepository : ICategoriesRepository
         catch (Exception ex)
         {
             _logger.LogError($"CategoriesRepository > GetAllCategoriesAsync > Error: {ex.Message}");
-            throw; // Rethrow the exception or handle it appropriately
+            return null;
         }
     }
 
@@ -55,7 +55,7 @@ public class CategoriesRepository : ICategoriesRepository
         catch (Exception ex)
         {
             _logger.LogError($"CategoriesRepository > AddCategoryAsync > Error: {ex.Message}");
-            throw; // Rethrow the exception or handle it appropriately
+            return false;
         }
     }
     public async Task<bool> IsCategoryNameUniqueAsync(string categoryName)
