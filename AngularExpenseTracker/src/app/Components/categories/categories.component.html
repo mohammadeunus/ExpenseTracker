@@ -1,1 +1,28 @@
-<p>categories works!</p>
+<div class="container">
+  <div *ngIf="category != null" class="container my-5">
+    <h1>Stock List</h1>
+    <table class="table" *ngIf="category && category.length > 0">
+      <tbody>
+        <tr *ngFor="let eachStock of category">
+          <td>{{ eachStock }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p *ngIf="category == null">Category list is empty.</p>
+
+  <div class="d-flex">
+    <form class="form-inline">
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="inputPassword2" class="sr-only"></label>
+        <input
+          type="text"
+          class="form-control"
+          id="addEntity"
+          placeholder="category name"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Add</button>
+    </form>
+  </div>
+</div>
