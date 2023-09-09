@@ -1,0 +1,53 @@
+<div *ngIf="categories != null" class="container my-5">
+  <h1>Category List</h1>
+  <table class="table" *ngIf="categories && categories.length > 0">
+    <tbody>
+      <tr *ngFor="let eachStock of categories">
+        <td>{{ eachStock.id }}</td>
+        <td>{{ eachStock.name }}</td>
+        <td>
+          <a
+            class="edit-link"
+            type="button"
+            (click)="updateCategoryEvent(eachStock)"
+            aria-current="page"
+            >update</a
+          >
+        </td>
+        <td>
+          <a
+            class="delete-link"
+            type="button"
+            (click)="deleteCategoryEvent(eachStock.id)"
+            aria-current="page"
+            >delete</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p *ngIf="categories == null">Category list is empty.</p>
+
+<div class="d-flex">
+  <form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="inputPassword2" class="sr-only"></label>
+      <input
+        #categoryInput
+        type="text"
+        class="form-control"
+        id="addEntity"
+        placeholder="category name"
+      />
+    </div>
+    <!-- Pass the input value as a parameter when the "Add" button is clicked -->
+    <button
+      type="button"
+      class="btn btn-primary mb-2"
+      (click)="addCategoryEvent(categoryInput.value)"
+    >
+      Add
+    </button>
+  </form>
+</div>

@@ -1,0 +1,8 @@
+.edit-link {
+  color: green; /* Change to the desired color for the edit link */
+  margin-right: 10px; /* Adjust the value to control the amount of space */
+}
+
+.delete-link {
+  color: red; /* Change to the desired color for the delete link */
+}
