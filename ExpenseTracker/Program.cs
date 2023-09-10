@@ -40,6 +40,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()); //allowing any origin, in our case allowing angular access to talk to our api.
+
 app.UseAuthorization();
 
 app.MapControllers();

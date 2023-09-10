@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using ExpenseTracker.Repositories;
 using ExpenseTracker.Models;
 using ExpenseTracker.Repository;
+using ExpenseTracker.DTO;
 
 namespace ExpenseTracker.Controllers;
 
@@ -44,26 +45,26 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPost("AddCategory")]
-    public async Task<IActionResult> AddCategory(string responseCategoryName)
+    public async Task<IActionResult> AddCategory(CategoryEntryDTO responseEntry)
     {
         // user inserted data or not.
-        if (responseCategoryName == null) return BadRequest("No data inserted.");
+        if (responseEntry == null) return BadRequest("No data inserted.");
 
         try
         {
             // check duplicate or not.
-            if (await _categoriesRepository.IsCategoryNameUniqueAsync(responseCategoryName)) return BadRequest("Duplicate category.");
+            if (await _categoriesRepository.IsCategoryNameUniqueAsync(responseEntry.CategoryName)) return BadRequest("Duplicate category.");
 
             //upload data to database.
-            var isAdded = await _categoriesRepository.AddCategoryAsync(responseCategoryName.Trim());
+            var isAdded = await _categoriesRepository.AddCategoryAsync(responseEntry.CategoryName.Trim());
             if (isAdded)
             {
                 _logger.LogInformation($"CategoriesController > AddCategory > Category added successfully.");
-                return Ok("Category added successfully.");
+                return Ok(new { message = "Category added successfully" });
             }
             else
             {
-                return BadRequest("Data could not be saved, try again.");
+                return BadRequest(new { message = "Data could not be saved, try again" });
             }
         }
         catch (Exception ex)
@@ -83,10 +84,10 @@ public class CategoriesController : ControllerBase
             var deleted = await _categoriesRepository.IsCategoryIdDeleted(id);
             if (deleted)
             {
-                return Ok($"category id: {id} deleted successfully");
+                return Ok(new { message = "Category is deleted successfully" });
             }
-            else { 
-                return BadRequest("Internal Server Error: trye again"); 
+            else {
+                return BadRequest(new { message = "Internal Server Error: Try again" });
             }
         }
         catch (Exception ex)
